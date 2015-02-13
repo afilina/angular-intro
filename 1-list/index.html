@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app>
+<head>
+        <meta charset="utf-8">
+        <title>My Video Store</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../js/angular/angular.js"></script>
+        <script src="app.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="ProductsCtrl" class="container">
+        
+        <h1>My Video Store</h1>
+
+        <div>
+            Showing {{ products.length }} products(s)
+        </div>
+
+        <div class="product-detail" ng-show="selectedProduct">
+            <h2>{{ selectedProduct.name }}</h2>
+            <p>
+                ${{ selectedProduct.price }}<br>
+                <span ng-class="{'out-of-stock': selectedProduct.stock == 0 }">{{ selectedProduct.stock }} in stock</span>
+            </p>
+            <p>{{ selectedProduct.description }}</p>
+        </div>
+        
+        <div class="product-list">
+            <div ng-repeat="item in products" class="product">
+                <span class="thumb">
+                    <a href="" ng-click="showDetails(item)"><img ng-src="{{ item.image }}"></a>
+                </span>
+                <span class="text">
+                    {{ item.name }}<br>
+                    ${{ item.price }}
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

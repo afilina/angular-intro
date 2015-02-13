@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+        <meta charset="utf-8">
+        <title>My Video Store</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../js/angular/angular.js"></script>
+        <script src="../js/angular/angular-resource.js"></script>
+        <script src="app.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="ProductsCtrl" class="container">
+
+        <div class="cart">
+            <div class="header" ng-click="showCart = !showCart">Shopping cart (${{ cart.total }})</div>
+            <div class="body" ng-show="showCart">
+                <div ng-repeat="item in cart.products" class="product">
+                    <label>{{ item.name }}</label>
+                    <input type="number" ng-model="item.qty" min="0" max="{{ item.stock }}" step="1" ng-change="updateCartTotal()">
+                    x ${{ item.price }}
+                </div>
+            </div>
+        </div>
+        
+        <h1>My Video Store</h1>
+
+        <div class="filters">
+            <input type="text" ng-model="query" ng-change="updateResults()" placeholder="Search">
+            <label>Price:</label>
+            <input type="number" ng-model="minPrice" min="1" max="100" step="1" ng-change="updateResults()">
+            to <input type="number" ng-model="maxPrice" min="1" max="100" step="1" ng-change="updateResults()">
+        </div>
+
+        <div class="product-detail" ng-show="selectedProduct">
+            <h2>{{ selectedProduct.name }}</h2>
+            <p>
+                ${{ selectedProduct.price }}<br>
+                <span ng-class="{'out-of-stock': selectedProduct.stock == 0 }">{{ selectedProduct.stock }} in stock</span>
+            </p>
+            <p>{{ selectedProduct.description }}</p>
+            <button ng-click="addToCart(selectedProduct)" ng-disabled="selectedProduct.stock === 0">Add to cart</button>
+        </div>
+        
+        <div class="product-list">
+            <div ng-repeat="item in products" class="product" ng-class="{'dim': item.hidden == true}">
+                <span class="thumb">
+                    <a href="" ng-click="showDetails(item)"><img ng-src="{{ item.image }}"></a>
+                </span>
+                <span class="text">
+                    {{ item.name }}<br>
+                    ${{ item.price }}<br>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
