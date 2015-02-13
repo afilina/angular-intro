@@ -11,7 +11,7 @@ app.controller('ProductsCtrl', function($scope, $resource) {
     };
     $scope.showCart = false;
 
-    var url = 'http://api.shop.dev/v1.0/products';
+    var url = 'http://demoapi.foolab.ca/v1.0/products';
     $resource(url).get({}, function(response) {
         $scope.products = response.data;
     });
