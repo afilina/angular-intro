@@ -1,0 +1,8 @@
+<div class="product-detail" ng-show="product" style="width: 100%">
+    <h2>{{ product.name }}</h2>
+    <p>
+        ${{ product.price }}<br>
+        <span ng-class="{'out-of-stock': product.stock == 0 }">{{ product.stock }} in stock</span>
+    </p>
+    <p>{{ product.description }}</p>
+</div>

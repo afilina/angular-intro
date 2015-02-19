@@ -1,0 +1,20 @@
+<h1>My Video Store</h1>
+
+<div class="filters">
+    <input type="text" ng-model="query" ng-change="updateResults()" placeholder="Search">
+    <label>Price:</label>
+    <input type="number" ng-model="minPrice" min="1" max="100" step="1" ng-change="updateResults()">
+    to <input type="number" ng-model="maxPrice" min="1" max="100" step="1" ng-change="updateResults()">
+</div>
+
+<div class="product-list">
+    <div ng-repeat="item in products" class="product" ng-class="{'dim': item.hidden == true}">
+        <span class="thumb">
+            <a href="#detail/{{item.id}}"><img ng-src="{{ item.image }}"></a>
+        </span>
+        <span class="text">
+            {{ item.name }}<br>
+            ${{ item.price }}<br>
+        </span>
+    </div>
+</div>
